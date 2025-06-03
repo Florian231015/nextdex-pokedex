@@ -5,7 +5,6 @@ import { PokemonDetail } from "../../../lib/types";
 import StatsChart from "../../../components/StatsChart";
 import TypeBadge from "../../../components/TypeBadge";
 import Link from "next/link";
-
 interface Props {
   params: { id: string };
 }
@@ -13,7 +12,7 @@ interface Props {
 export const dynamic = "force-static"; // SSG + ISR
 
 export default async function PokemonDetailPage({ params }: Props) {
-  const { id } = params;
+  const { id } = await params;
   const pokemon: PokemonDetail = await getPokemonById(id);
 
   const displayName =

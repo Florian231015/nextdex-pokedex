@@ -1,12 +1,17 @@
 // src/components/PokemonCard.tsx
+"use client";
+
 import React from "react";
+import { Star } from "lucide-react";
+import { useFavorites } from "@/context/FavoritesContent";
+
 
 interface PokemonCardProps {
   name: string;
   id: string;
   image: string;
-  primaryType: string;   // z.B. "fire", "water" oder "default"
-  allTypes: string[];    // z.B. ["grass", "poison"] oder []
+  primaryType: string; // z.B. "fire", "water" oder "default"
+  allTypes: string[]; // z.B. ["grass", "poison"] oder []
 }
 
 const typeBgClasses: Record<string, string> = {
@@ -30,7 +35,17 @@ const typeColors: Record<string, string> = {
   ground: "bg-yellow-600 text-gray-100",
   fairy: "bg-pink-400 text-gray-800",
   psychic: "bg-purple-500 text-white",
-  default: "bg-gray-400 text-gray-800",
+  normal: "bg-gray-400 text-gray-800",
+  flying: "bg-indigo-300 text-gray-800",
+  rock: "bg-yellow-700 text-gray-100",
+  bug: "bg-lime-500 text-gray-900",
+  dragon: "bg-indigo-700 text-white",
+  dark: "bg-gray-700 text-gray-100",
+  steel: "bg-gray-500 text-gray-100",
+  ghost: "bg-purple-700 text-white",
+  poison: "bg-purple-600 text-white",
+  fighting: "bg-red-600 text-white",
+  default: "bg-gray-300 text-gray-800",
 };
 
 export default function PokemonCard({
@@ -43,9 +58,25 @@ export default function PokemonCard({
   const displayName = name.charAt(0).toUpperCase() + name.slice(1);
   const bgClass = typeBgClasses[primaryType] || typeBgClasses.default;
 
+  // Favoriten‐Context nutzen
+  const { favorites, toggleFavorite } = useFavorites();
+  const isFavorite = favorites.includes(id);
+
   return (
     <div className="relative">
-      {/* Typ-Badges oben rechts */}
+      {/* ⭐ Favoriten‐Button oben links */}
+      <button
+        onClick={(e) => {
+          e.preventDefault(); // Verhindert, dass der Link ausgelöst wird
+          toggleFavorite(id);
+        }}
+        className="absolute top-2 left-2 z-20 text-yellow-400 hover:text-yellow-300"
+        aria-label={isFavorite ? "Favorit entfernen" : "Zu Favoriten hinzufügen"}
+      >
+        {isFavorite ? <Star fill="yellow" size={20} /> : <Star size={20} />}
+      </button>
+
+      {/* Typ‐Badges oben rechts */}
       <div className="absolute top-2 right-2 flex flex-col space-y-1 z-10">
         {allTypes.map((t) => {
           const lower = t.toLowerCase();
@@ -61,7 +92,7 @@ export default function PokemonCard({
         })}
       </div>
 
-      {/* Haupt-Card */}
+      {/* Haupt‐Card */}
       <div
         className={`${bgClass} rounded-2xl border border-gray-200 dark:border-gray-700 shadow transform hover:shadow-2xl hover:scale-[1.03] transition-all duration-200 cursor-pointer`}
       >
