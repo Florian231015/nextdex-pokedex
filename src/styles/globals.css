@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Globale Anpassungen */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+/* Optional: eigene Utility-Klassen */
+.bg-pattern {
+  /* falls du ein dezentes Raster/SVG als Hintergrund nutzen willst */
+  background-image: url("/icons/grid.svg");
+  background-repeat: repeat;
+  opacity: 0.05;
+}

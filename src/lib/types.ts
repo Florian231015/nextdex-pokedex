@@ -6,7 +6,7 @@ export interface PokemonOverview {
   url: string;
 }
 
-// Basis-Struktur der Detail-Abfrage
+// Detail-Struktur gemäß PokéAPI
 export interface PokemonDetail {
   id: number;
   name: string;
@@ -28,7 +28,6 @@ export interface PokemonDetail {
       };
     };
   };
-  // Falls du noch Fähigkeiten anzeigen möchtest:
   abilities: {
     ability: { name: string; url: string };
     is_hidden: boolean;
