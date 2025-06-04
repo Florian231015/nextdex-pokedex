@@ -5,13 +5,16 @@ import { PokemonDetail } from "../../../lib/types";
 import StatsChart from "../../../components/StatsChart";
 import TypeBadge from "../../../components/TypeBadge";
 import Link from "next/link";
-interface Props {
-  params: { id: string };
-}
 
 export const dynamic = "force-static"; // SSG + ISR
 
-export default async function PokemonDetailPage({ params }: Props) {
+// Fix: Update the type definition to expect params as a Promise
+export default async function PokemonDetailPage({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}) {
+  // Fix: Await the params Promise to get the actual parameters
   const { id } = await params;
   const pokemon: PokemonDetail = await getPokemonById(id);
 
@@ -23,8 +26,7 @@ export default async function PokemonDetailPage({ params }: Props) {
     "";
 
   const allTypes = pokemon.types.map((t) => t.type.name.toLowerCase());
-  const primaryType = allTypes[0] || "default";
-
+  
   return (
     <section className="relative py-12 px-6 lg:px-8 max-w-3xl mx-auto">
       {/* Dezentes Raster im Hintergrund */}

@@ -5,12 +5,10 @@ import { getPokemonById } from "../../lib/api";
 import { PokemonDetail } from "../../lib/types";
 import StatsChart from "../../components/StatsChart";
 import TypeBadge from "../../components/TypeBadge";
-import Link from "next/link";
+
 import { useSearchParams } from 'next/navigation'
  
-interface ComparePageProps {
-  searchParams: { id1?: string; id2?: string };
-}
+
 
 
 
@@ -31,6 +29,7 @@ export default  function ComparePage() {
           const data = await getPokemonById(id1);
           if (!cancelled) setFirst(data);
         } catch (e) {
+          console.error("Fehler beim Laden von Pokémon ID 1:", e);
           if (!cancelled) setFirst(null);
         }
       } else {
@@ -41,6 +40,7 @@ export default  function ComparePage() {
           const data = await getPokemonById(id2);
           if (!cancelled) setSecond(data);
         } catch (e) {
+          console.error("Fehler beim Laden von Pokémon ID 2:", e);
           if (!cancelled) setSecond(null);
         }
       } else {
