@@ -37,31 +37,32 @@ export default function FavoritesPage() {
   }, [favorites]);
 
   return (
-    <section className="py-12 px-6 lg:px-8 max-w-5xl mx-auto">
-      <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 text-center text-white font-primary">
-        Deine Favoriten
-      </h2>
-      {list === null ? (
-        <p className="text-center text-gray-300">Lade Favoriten…</p>
-      ) : list.length === 0 ? (
-        <p className="text-center text-gray-300">
-          Du hast noch keine Favoriten ausgewählt.
-        </p>
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
-          {list.map((poke) => (
-            <Link key={poke.id} href={`/pokemon/${poke.id}`} passHref>
-              <PokemonCard
-                name={poke.name}
-                id={poke.id}
-                image={poke.image}
-                primaryType="default"
-                allTypes={[]}
-              />
-            </Link>
-          ))}
-        </div>
-      )}
-    </section>
+<section className="py-12 px-6 lg:px-8 max-w-5xl mx-auto">
+  <h2 className="text-4xl sm:text-5xl font-extrabold mb-8 text-center text-white font-primary">
+    Deine Favoriten
+  </h2>
+  {list === null ? (
+    <p className="text-center text-gray-300">Lade Favoriten…</p>
+  ) : list.length === 0 ? (
+    <p className="text-center text-gray-300">
+      Du hast noch keine Favoriten ausgewählt.
+    </p>
+  ) : (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+      {list.map((poke) => (
+        <Link key={poke.id} href={`/pokemon/${poke.id}`} passHref>
+          <PokemonCard
+            name={poke.name}
+            id={poke.id}
+            image={poke.image}
+            primaryType="default"
+            allTypes={[]}
+          />
+        </Link>
+      ))}
+    </div>
+  )}
+</section>
+
   );
 }
