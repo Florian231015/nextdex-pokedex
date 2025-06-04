@@ -196,7 +196,5 @@ function PokemonDetailCard({ pokemon }: { pokemon: PokemonDetail }) {
     </div>
   );
 }
-function async() {
-    throw new Error("Function not implemented.");
-}
+
 
